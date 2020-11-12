@@ -1,5 +1,5 @@
-async function getPokemons(){
-	const request = new Request('https://pokeapi.co/api/v2/pokemon?offset=1&limit=5')
+async function getPokemons(offset, limit){
+	const request = new Request(`https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`)
 	return(fetch(request)
 		.then(response => response.json())
 		.then(async json => {
