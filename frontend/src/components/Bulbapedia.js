@@ -3,7 +3,8 @@ import Filter from './Filter'
 import PokeList from './PokeList'
 import API from '../util/APIConnect'
 import { makeStyles } from '@material-ui/core/styles';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import {CircularProgress, Button} from '@material-ui/core';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -14,12 +15,10 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
-
 const Bulbapedia = ({ changeFilter }) => {
-  const [pokemons, setPokemons] = useState([]); 
-  const [offset, setOffset] = useState('0'); 
-  const [limit, setLimit] = useState('21'); 
+  const [pokemons, setPokemons] = useState(null); 
+  const [offset, setOffset] = useState(0); 
+  const [limit, setLimit] = useState(21); 
   const classes = useStyles();
 
 
@@ -31,43 +30,35 @@ const Bulbapedia = ({ changeFilter }) => {
   }
 
   function nextAction(){
-              setOffset(getNewOffset(1));
-    console.log('OFFSET: ', offset)
-    API(offset, limit).then(result => {
-                setPokemons(result)
-                
-                console.log('pokemons filled: ', pokemons)
-                console.log('filled: ', offset, limit)
-              });
-    console.log('OFFSET: ', offset)
+		setPokemons([]);
+    API(offset + 50, limit).then(result => setPokemons(result));
+		setOffset(offset + 50);
   }
 
   function prevAction(){
-              setOffset(getNewOffset(-1));
-    API(offset, limit).then(result => {
-                setPokemons(result)
-                
-                console.log('pokemons filled: ', pokemons)
-                console.log('filled: ', offset, limit)
-              });
+		setPokemons([]);
+		if(offset){
+			API(offset - 50, limit).then(result => setPokemons(result));
+			setOffset(offset - 50);
+		}
   }
 
-	if(pokemons.length !== 0)
+	if(pokemons !== null)
 		return (
 			<div>
 				<Filter/>
-        <div class="container">
+        <div style={{display: 'inline-block'}}>
           <PokeList pokemons={pokemons} />
         </div>
-        <button type="button" onClick={prevAction}>Prev</button>
-        <button type="button" onClick={nextAction}>Next</button>
+        <div style={{marginTop: '20px'}}>
+					<Button type="button" onClick={prevAction}>Prev</Button>
+					<Button type="button" onClick={nextAction}>Next</Button>
+        </div>
 			</div>
 		);
 	API(offset, limit).then(result => {
-              setPokemons(result); 
-              
-              console.log('pokemons filled: ', pokemons)
-            });
+		setPokemons(result); 
+	});
 	return(
     <div className={classes.root}>
       <CircularProgress style={{marginLeft: 'auto', marginRight: 'auto'}}/>
