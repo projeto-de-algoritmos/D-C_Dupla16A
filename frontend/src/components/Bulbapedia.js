@@ -22,8 +22,10 @@ const Bulbapedia = () => {
   const [limit, setLimit] = useState(21); 
   const classes = useStyles();
 
-  const changeFilter = (atrib, ord) => {
-    setPokemons(mergeSort(pokemons, atrib, ord))
+
+  function changeFilter (atrib, ord){
+		mergeSort(setPokemons, pokemons, atrib, ord);
+		console.log('asd', setPokemons)
   }
 
   function nextAction(){

@@ -26,32 +26,30 @@ const Filter = ({ changeFilter }) => {
   const [attack, setAttack] = React.useState('');
   const [spAttack, setSpAttack] = React.useState('');
   const [speed, setSpeed] = React.useState('');
-	const filtes = [
-	]
 
   const handleChange = (event) => {
 		if (event.target.name === 'h'){
-      changeFilter('hp')
+      changeFilter('hp', event.target.value[0])
 			setHp(event.target.value);
     }
 		else if(event.target.name === 'd'){
 			setDefense(event.target.value);
-      changeFilter('defense')
+      changeFilter('defense', event.target.value[0])
     }
 		else if(event.target.name === 'sd'){
-      changeFilter('specialDefense')
+      changeFilter('specialDefense', event.target.value[0])
 			setSpDefense(event.target.value);
     }
 		else if(event.target.name === 'a'){
-      changeFilter('attack');
+      changeFilter('attack', event.target.value[0]);
 			setAttack(event.target.value);
     }
 		else if(event.target.name === 'sa'){
-      changeFilter('specialAttack')
+      changeFilter('specialAttack', event.target.value[0])
 			setSpAttack(event.target.value);
     }
 		else if(event.target.name === 's'){
-      changeFilter('speed')
+      changeFilter('speed', event.target.value[0])
 			setSpeed(event.target.value);
     }
   };
@@ -142,6 +140,7 @@ const Filter = ({ changeFilter }) => {
           <MenuItem value={'Decrescente'}>Decrescente</MenuItem>
         </Select>
       </FormControl>
+			<button onClick={() => changeFilter('defense', 'D')}>Prev</button>
     </div>
   );
 }

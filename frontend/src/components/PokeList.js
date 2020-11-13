@@ -12,6 +12,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const PokeList = ({ pokemons, limit, offset }) => {
+  const [pokemonList, setPokemonList] = React.useState('');
   const classes = useStyles();
 	console.log('pokemons', pokemons);
 	if(pokemons.length === 0){
