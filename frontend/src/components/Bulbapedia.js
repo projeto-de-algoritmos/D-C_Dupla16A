@@ -17,15 +17,16 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Bulbapedia = () => {
+	const [modification, setModification] = useState(true)
   const [pokemons, setPokemons] = useState(null); 
   const [offset, setOffset] = useState(0); 
   const [limit, setLimit] = useState(21); 
   const classes = useStyles();
 
-
-  function changeFilter (atrib, ord){
-		mergeSort(setPokemons, pokemons, atrib, ord);
-		console.log('asd', setPokemons)
+  const changeFilter = (atrib, ord) => {
+		var sortedPokemons = mergeSort(pokemons, atrib, ord);
+    setPokemons(sortedPokemons)
+		setModification(!modification)
   }
 
   function nextAction(){
@@ -41,7 +42,7 @@ const Bulbapedia = () => {
 	if(pokemons !== null)
 		return (
 			<div>
-				<Filter changeFilter={changeFilter}/>
+				<Filter pokemons={pokemons} changeFilter={changeFilter}/>
         <div style={{display: 'inline-block'}}>
           <PokeList pokemons={pokemons} offset={offset} limit={limit} />
         </div>

@@ -1,5 +1,5 @@
 async function getPokemons(setPokemons){
-    const request = new Request(`https://pokeapi.co/api/v2/pokemon?offset=0&limit=9`)
+    const request = new Request(`https://pokeapi.co/api/v2/pokemon?offset=0&limit=717`)
     return(fetch(request)
         .then(response => response.json())
         .then(async json => {
@@ -24,7 +24,7 @@ async function getPokemons(setPokemons){
                         }];
                         return(arr)
                     }).then(teste => {
-                        if(teste.length === 9){
+												if(teste.length === 717){
 													console.log('terminou')
 													setPokemons(teste)
                         }

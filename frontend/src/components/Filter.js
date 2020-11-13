@@ -6,6 +6,7 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import API from '../util/APIConnect'
+import mergeSort from '../util/mergeSort'
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -18,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const Filter = ({ changeFilter }) => {
+const Filter = (props) => {
   const classes = useStyles();
   const [hp, setHp] = React.useState('');
   const [defense, setDefense] = React.useState('');
@@ -29,27 +30,27 @@ const Filter = ({ changeFilter }) => {
 
   const handleChange = (event) => {
 		if (event.target.name === 'h'){
-      changeFilter('hp', event.target.value[0])
+      props.changeFilter('hp', event.target.value[0])
 			setHp(event.target.value);
     }
 		else if(event.target.name === 'd'){
 			setDefense(event.target.value);
-      changeFilter('defense', event.target.value[0])
+      props.changeFilter('defense', event.target.value[0])
     }
 		else if(event.target.name === 'sd'){
-      changeFilter('specialDefense', event.target.value[0])
+      props.changeFilter('specialDefense', event.target.value[0])
 			setSpDefense(event.target.value);
     }
 		else if(event.target.name === 'a'){
-      changeFilter('attack', event.target.value[0]);
+      props.changeFilter('attack', event.target.value[0]);
 			setAttack(event.target.value);
     }
 		else if(event.target.name === 'sa'){
-      changeFilter('specialAttack', event.target.value[0])
+      props.changeFilter('specialAttack', event.target.value[0])
 			setSpAttack(event.target.value);
     }
 		else if(event.target.name === 's'){
-      changeFilter('speed', event.target.value[0])
+      props.changeFilter('speed', event.target.value[0])
 			setSpeed(event.target.value);
     }
   };
@@ -140,7 +141,6 @@ const Filter = ({ changeFilter }) => {
           <MenuItem value={'Decrescente'}>Decrescente</MenuItem>
         </Select>
       </FormControl>
-			<button onClick={() => changeFilter('defense', 'D')}>Prev</button>
     </div>
   );
 }

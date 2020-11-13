@@ -1,8 +1,7 @@
-export default function mergeSort(setPokemons, pokemons, atrib, ord){
+export default function mergeSort(pokemons, atrib, ord){
   
   mergeSortDefault(pokemons, atrib, ord, 0, pokemons.length - 1);
 	console.log(pokemons)
-	setPokemons(pokemons)
   return pokemons
 }
 
