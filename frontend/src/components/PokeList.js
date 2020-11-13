@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import getType from '../util/Colors'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,7 +26,9 @@ const PokeList = ({ pokemons, limit, offset }) => {
 	}
 	const displayTypes = (types) => {
 		return(types.map(type => (
-			<h5 style={{marginLeft: '5px'}}>{type.type.name}</h5>
+			<div style={{backgroundColor: '#7050848', display: 'flex', marginRight: '30px'}}>
+				<h5 >{type.type.name}</h5>
+			</div>
 		))
 		)
 	}
@@ -41,9 +44,7 @@ const PokeList = ({ pokemons, limit, offset }) => {
 				<div style={{display: 'flex', flexDirection: 'column', width: '100%'}}>
 					<div style={{display: 'flex', justifyContent: 'space-between'}}>
 						<h5 style={{marginRight: '20px'}}>{pokemon.name}</h5>
-						<div style={{display: 'flex', marginRight: '30px'}}>
 							{displayTypes(pokemon.types)}
-						</div>
 					</div>
 					<div style={{display: 'flex', justifyContent: 'space-between'}}>
 						<h5 style={{fontSize: '50%', marginLeft: '5px'}}>HP: {pokemon.stats[0].base_stat}</h5>
