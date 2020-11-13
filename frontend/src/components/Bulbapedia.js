@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Filter from './Filter'
 import PokeList from './PokeList'
+import mergeSort from '../util/mergeSort'
 import API from '../util/APIConnect'
 import { makeStyles } from '@material-ui/core/styles';
 import {CircularProgress, Button} from '@material-ui/core';
@@ -15,40 +16,32 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Bulbapedia = ({ changeFilter }) => {
+const Bulbapedia = () => {
   const [pokemons, setPokemons] = useState(null); 
   const [offset, setOffset] = useState(0); 
   const [limit, setLimit] = useState(21); 
   const classes = useStyles();
 
-
-  function getNewOffset (mult){
-    if(parseInt(offset) < parseInt(limit) && mult === -1)return '0'
-    const val = (parseInt(offset) + (mult *  parseInt(limit)))
-    console.log('VAL ', val.toString())
-    return val.toString()
+  const changeFilter = (atrib, ord) => {
+    setPokemons(mergeSort(pokemons, atrib, ord))
   }
 
   function nextAction(){
-		setPokemons([]);
-    API(offset + 50, limit).then(result => setPokemons(result));
-		setOffset(offset + 50);
+		setOffset(offset + limit);
   }
 
   function prevAction(){
-		setPokemons([]);
 		if(offset){
-			API(offset - 50, limit).then(result => setPokemons(result));
-			setOffset(offset - 50);
+			setOffset(offset - limit);
 		}
   }
 
 	if(pokemons !== null)
 		return (
 			<div>
-				<Filter/>
+				<Filter changeFilter={changeFilter}/>
         <div style={{display: 'inline-block'}}>
-          <PokeList pokemons={pokemons} />
+          <PokeList pokemons={pokemons} offset={offset} limit={limit} />
         </div>
         <div style={{marginTop: '20px'}}>
 					<Button type="button" onClick={prevAction}>Prev</Button>
@@ -56,9 +49,7 @@ const Bulbapedia = ({ changeFilter }) => {
         </div>
 			</div>
 		);
-	API(offset, limit).then(result => {
-		setPokemons(result); 
-	});
+	API(setPokemons)
 	return(
     <div className={classes.root}>
       <CircularProgress style={{marginLeft: 'auto', marginRight: 'auto'}}/>

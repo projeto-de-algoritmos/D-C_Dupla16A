@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const PokeList = ({ pokemons }) => {
+const PokeList = ({ pokemons, limit, offset }) => {
   const classes = useStyles();
 	console.log('pokemons', pokemons);
 	if(pokemons.length === 0){
@@ -29,12 +29,13 @@ const PokeList = ({ pokemons }) => {
 		)
 	}
 	console.log(pokemons)
-  return pokemons.map((pokemon, index) => (
+  return pokemons.map((pokemon, index) => {if(index < offset+limit && index >= offset)
+        return(
     <div
 			style={{display: 'inline-block', width: '30%', height: '50px'}}
       key={pokemon.id}
     >
-			<div style={{display: 'flex'}}>
+			<div style={{display: 'flex', border: '1px solid', marginLeft: '5px'}}>
 				<img src={`${pokemon.sprites.front_default}`} />
 				<div style={{display: 'flex', flexDirection: 'column', width: '100%'}}>
 					<div style={{display: 'flex', justifyContent: 'space-between'}}>
@@ -49,12 +50,12 @@ const PokeList = ({ pokemons }) => {
 						<h5 style={{fontSize: '50%', marginLeft: '5px'}}>Defense: {pokemon.stats[2].base_stat}</h5>
 						<h5 style={{fontSize: '50%', marginLeft: '5px'}}>SP Attack: {pokemon.stats[3].base_stat}</h5>
 						<h5 style={{fontSize: '50%', marginLeft: '5px'}}>SP Defense: {pokemon.stats[4].base_stat}</h5>
-						<h5 style={{fontSize: '50%', marginLeft: '5px'}}>Speed: {pokemon.stats[5].base_stat}</h5>
+						<h5 style={{fontSize: '50%', marginLeft: '5px', marginRight: '5px'}}>Speed: {pokemon.stats[5].base_stat}</h5>
 					</div>
 				</div>
 			</div>
     </div>
-  ));
+  )});
 };
 
 export default PokeList;

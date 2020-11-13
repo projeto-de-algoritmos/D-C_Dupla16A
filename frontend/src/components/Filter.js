@@ -30,18 +30,30 @@ const Filter = ({ changeFilter }) => {
 	]
 
   const handleChange = (event) => {
-		if (event.target.name === 'h')
+		if (event.target.name === 'h'){
+      changeFilter('hp')
 			setHp(event.target.value);
-		else if(event.target.name === 'd')
+    }
+		else if(event.target.name === 'd'){
 			setDefense(event.target.value);
-		else if(event.target.name === 'sd')
+      changeFilter('defense')
+    }
+		else if(event.target.name === 'sd'){
+      changeFilter('specialDefense')
 			setSpDefense(event.target.value);
-		else if(event.target.name === 'a')
+    }
+		else if(event.target.name === 'a'){
+      changeFilter('attack');
 			setAttack(event.target.value);
-		else if(event.target.name === 'sa')
+    }
+		else if(event.target.name === 'sa'){
+      changeFilter('specialAttack')
 			setSpAttack(event.target.value);
-		else if(event.target.name === 's')
+    }
+		else if(event.target.name === 's'){
+      changeFilter('speed')
 			setSpeed(event.target.value);
+    }
   };
 
   return (
