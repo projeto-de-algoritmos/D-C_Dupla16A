@@ -1,63 +1,63 @@
-import React, { useState, useEffect } from 'react';
-import Filter from './Filter'
-import PokeList from './PokeList'
-import mergeSort from '../util/mergeSort'
-import API from '../util/APIConnect'
-import { makeStyles } from '@material-ui/core/styles';
-import {CircularProgress, Button} from '@material-ui/core';
-
+import React, { useState, useEffect } from "react";
+import Filter from "./Filter";
+import PokeList from "./PokeList";
+import mergeSort from "../util/mergeSort";
+import API from "../util/APIConnect";
+import { makeStyles } from "@material-ui/core/styles";
+import { CircularProgress, Button } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: 'flex',
-    '& > * + *': {
+    display: "flex",
+    "& > * + *": {
       marginLeft: theme.spacing(2),
     },
   },
 }));
 
 const Bulbapedia = () => {
-	const [modification, setModification] = useState(true)
-  const [pokemons, setPokemons] = useState(null); 
-  const [offset, setOffset] = useState(0); 
-  const [limit, setLimit] = useState(21); 
+  const [modification, setModification] = useState(true);
+  const [pokemons, setPokemons] = useState(null);
+  const [offset, setOffset] = useState(0);
+  const [limit, setLimit] = useState(21);
   const classes = useStyles();
 
   const changeFilter = (atrib, ord) => {
-		var sortedPokemons = mergeSort(pokemons, atrib, ord);
-    setPokemons(sortedPokemons)
-		setModification(!modification)
+    var sortedPokemons = mergeSort(pokemons, atrib, ord);
+    setPokemons(sortedPokemons);
+    setModification(!modification);
+  };
+
+  function nextAction() {
+    setOffset(offset + limit);
   }
 
-  function nextAction(){
-		setOffset(offset + limit);
+  function prevAction() {
+    if (offset) setOffset(offset - limit);
   }
 
-  function prevAction(){
-		if(offset){
-			setOffset(offset - limit);
-		}
-  }
-
-	if(pokemons !== null)
-		return (
-			<div>
-				<Filter pokemons={pokemons} changeFilter={changeFilter}/>
-        <div style={{display: 'inline-block'}}>
+  if (pokemons !== null)
+    return (
+      <div>
+        <Filter pokemons={pokemons} changeFilter={changeFilter} />
+        <div style={{ display: "inline-block" }}>
           <PokeList pokemons={pokemons} offset={offset} limit={limit} />
         </div>
-        <div style={{marginTop: '20px'}}>
-					<Button type="button" onClick={prevAction}>Prev</Button>
-					<Button type="button" onClick={nextAction}>Next</Button>
+        <div style={{ marginTop: "20px" }}>
+          <Button type="button" onClick={prevAction}>
+            Prev
+          </Button>
+          <Button type="button" onClick={nextAction}>
+            Next
+          </Button>
         </div>
-			</div>
-		);
-	API(setPokemons)
-	return(
+      </div>
+    );
+  API(setPokemons);
+  return (
     <div className={classes.root}>
-      <CircularProgress style={{marginLeft: 'auto', marginRight: 'auto'}}/>
+      <CircularProgress style={{ marginLeft: "auto", marginRight: "auto" }} />
     </div>
-	)
-}
+  );
+};
 export default Bulbapedia;
-
