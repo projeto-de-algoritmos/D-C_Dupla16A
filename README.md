@@ -13,7 +13,14 @@
 O projeto se baseia numa Pokedex, do desenho Pokemon. Sendo assim há a listagem de 717 pokemons extraidos de uma API, a [PokeAPI](https://pokeapi.co/), com diferentes status, e, com o programa desenvolvido, é possível ordenar esses status com um algorítimo de dividir e conquistar. 
 
 ## Screenshots
-Adicione 3 ou mais screenshots do projeto em funcionamento.
+Tela inicial<br>
+![Screenshot-1](./Tutorial/screenshots/screenshot-1.png)
+
+Ordenação por um parâmetro<br>
+![Screenshot-2](./Tutorial/screenshots/screenshot-2.png)
+
+Ordenação por dois parâmetros<br>
+![Screenshot-3](./Tutorial/screenshots/screenshot-3.png)
 
 ## Instalação 
 **Linguagem**: JavaScript<br>
