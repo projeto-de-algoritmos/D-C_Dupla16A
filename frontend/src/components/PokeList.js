@@ -26,20 +26,32 @@ const PokeList = ({ pokemons, limit, offset }) => {
 	}
 	const displayTypes = (types) => {
 		return(types.map(type => (
-			<div style={{backgroundColor: '#7050848', display: 'flex', marginRight: '30px'}}>
-				<h5 >{type.type.name}</h5>
+			<div className='types-container' style={{background: getType(type.type.name, 'background'), borderColor: getType(type.type.name, 'border')}}>
+				<h5 style={{marginLeft: 'auto', marginRight: 'auto'}}>{type.type.name}</h5>
 			</div>
-		))
+			))
 		)
+	}
+	const pokemonsBackground = (types) => {
+		var style;
+		console.log('types', types)
+		if(types.length === 1){
+			style = `linear-gradient(90deg, ${getType(types[0].type.name, 'background')}, ${getType(types[0].type.name, 'background')})`
+		}
+		else{
+			style = `linear-gradient(90deg, ${getType(types[0].type.name, 'background')}, ${getType(types[1].type.name, 'background')})`
+		}
+		return style
 	}
 	console.log(pokemons)
   return pokemons.map((pokemon, index) => {if(index < offset+limit && index >= offset)
         return(
     <div
-			style={{display: 'inline-block', width: '30%', height: '50px'}}
+			className='pokemons-container'
+			style={{background: pokemonsBackground(pokemon.types)}}
       key={pokemon.id}
     >
-			<div style={{display: 'flex', border: '1px solid', marginLeft: '5px'}}>
+			<div style={{display: 'flex', marginLeft: '5px'}}>
 				<img src={`${pokemon.sprites.front_default}`} />
 				<div style={{display: 'flex', flexDirection: 'column', width: '100%'}}>
 					<div style={{display: 'flex', justifyContent: 'space-between'}}>

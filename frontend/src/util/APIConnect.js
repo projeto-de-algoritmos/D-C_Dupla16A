@@ -1,3 +1,4 @@
+import mergeSort from '../util/mergeSort'
 async function getPokemons(setPokemons){
     const request = new Request(`https://pokeapi.co/api/v2/pokemon?offset=0&limit=717`)
     return(fetch(request)
@@ -25,6 +26,7 @@ async function getPokemons(setPokemons){
                         return(arr)
                     }).then(teste => {
 												if(teste.length === 717){
+													teste = mergeSort(teste, 'id', 'C');
 													console.log('terminou')
 													setPokemons(teste)
                         }

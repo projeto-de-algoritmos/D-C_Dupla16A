@@ -3,15 +3,9 @@
 }
 
 .App-logo {
-  height: 40vmin;
-  pointer-events: none;
+  height: 20vmin;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
 
 .App-header {
   background-color: #282c34;
@@ -42,15 +36,16 @@
   justify-content: space-between;
   align-items: center;
   margin: 4px auto;
-  padding: 16px;
-  border-radius: 5px;
-  width: 90%;
-	background: #7050848; 
+	border: 2px solid;
+  border-radius: 50px;
+	height: 32px;
+  width: 50%;
 }
 .pokemons-container {
-  display: flex;
+  display: inline-block;
   justify-content: space-between;
   align-items: center;
+	margin-left: 4px auto;
   margin: 4px auto;
   color: #fff;
   background: linear-gradient(
@@ -58,8 +53,15 @@
     rgba(255, 118, 20, 1) 0%,
     rgba(255, 84, 17, 1) 100%
   );
-
+  border-radius: 20px;
   padding: 16px;
-  border-radius: 5px;
-  width: 90%;
+	height: 20%;
+  width: 30%;
+}
+body {
+  background: linear-gradient(
+    90deg,
+		rgba(191, 191, 191, 1) 0%,
+    rgba(108, 122, 137, 1) 100%
+  );
 }
